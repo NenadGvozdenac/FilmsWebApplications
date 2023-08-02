@@ -25,8 +25,9 @@ public class RegisterService {
             throw new InvalidArgumentsException();
 
         String hashedPassword = passwordEncoder.encode(userRegistrationDTO.getPassword());
-
         userRegistrationDTO.setPassword(hashedPassword);
+
+        if(userRepository.findByUsername(userRegistrationDTO.getUsername()) != null) throw new InvalidArgumentsException();
 
         User user = new User(
                 userRegistrationDTO.getUsername(),

@@ -35,7 +35,6 @@ public class RegisterController {
     @PostMapping("/register")
     public ResponseEntity<MessageWithJWTToken> registerPost(@NotNull @RequestBody UserRegisterDTO userRegistrationDTO) {
         String username = userRegistrationDTO.getUsername();
-        String password = userRegistrationDTO.getPassword();
 
         try {
             registerService.registerUser(userRegistrationDTO);
