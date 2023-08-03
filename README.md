@@ -29,8 +29,8 @@ Before starting the development process, ensure you have the following installed
         - `mysql-connector-java` for MySQL database communication.
         - `spring-boot-starter-security` for handling user authentication and authorization.
         - `spring-boot-starter-webclient` for making HTTP requests to the external API.
-	- `jjwt-api`, `jjwt-impl, `jjwt-jackson` for creating JWT tokens.
-	- `unirest-java` for making HTTP requests.
+        - `jjwt-api`, `jjwt-impl, `jjwt-jackson` for creating JWT tokens.
+        - `unirest-java` for making HTTP requests.
 
 4. **Configure Application Properties:**
     - Open the `application.properties` (or `application.yml`) file and configure the database connection properties, such as URL, username, and password.
