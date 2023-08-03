@@ -6,9 +6,11 @@ import com.example.filmwebapplication.JsonResponses.GenreListResponse;
 import com.example.filmwebapplication.JsonResponses.MovieResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
+@Component
 public final class JsonParser {
 
     public static BestMoviesListResponse parsePopularMoviesJsonResponse(String json) {

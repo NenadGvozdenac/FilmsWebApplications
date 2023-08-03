@@ -17,7 +17,11 @@ import java.util.Map;
 @Component
 public class JWTTokenValidator {
 
-    public static final String SECRET_KEY = generateSecureKey();
+    public static final String SECRET_KEY;
+
+    static {
+        SECRET_KEY = "4d93a47b3b411c7d50b37eaa3f9f3b2757fe2781195b2c6f1c7dedd7ff5922cd";
+    }
     private static final long EXPIRATION_TIME = 86400000;
 
     private static String generateSecureKey() {
@@ -46,9 +50,8 @@ public class JWTTokenValidator {
     }
 
     public String extractUsername(String token) {
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(SECRET_KEY.getBytes(StandardCharsets.UTF_8))
-                .build()
+        Claims claims = Jwts.parser()
+                .setSigningKey(Base64.getUrlDecoder().decode(SECRET_KEY))
                 .parseClaimsJws(token)
                 .getBody();
 

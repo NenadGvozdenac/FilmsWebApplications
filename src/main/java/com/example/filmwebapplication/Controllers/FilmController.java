@@ -2,13 +2,11 @@ package com.example.filmwebapplication.Controllers;
 
 import com.example.filmwebapplication.DTOs.BasicMovieDTO;
 import com.example.filmwebapplication.DTOs.GenreDTO;
-import com.example.filmwebapplication.DTOs.UserRegisterDTO;
 import com.example.filmwebapplication.Models.Film;
 import com.example.filmwebapplication.Services.FilmService;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +48,16 @@ public class FilmController {
             ArrayList<BasicMovieDTO> movies = filmService.getMostPopularMovies();
             return new ResponseEntity<>(movies, HttpStatus.OK);
         } catch (UnirestException e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/most_popular/genre/{genre}")
+    public ResponseEntity<ArrayList<Film>> getMostPopularFilmsByGenre(@PathVariable String genre) {
+        try {
+            ArrayList<Film> films = filmService.getMostPopularFilmsByGenre(genre);
+            return new ResponseEntity<>(films, HttpStatus.OK);
+        } catch(RuntimeException e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }

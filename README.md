@@ -29,6 +29,8 @@ Before starting the development process, ensure you have the following installed
         - `mysql-connector-java` for MySQL database communication.
         - `spring-boot-starter-security` for handling user authentication and authorization.
         - `spring-boot-starter-webclient` for making HTTP requests to the external API.
+	- `jjwt-api`, `jjwt-impl, `jjwt-jackson` for creating JWT tokens.
+	- `unirest-java` for making HTTP requests.
 
 4. **Configure Application Properties:**
     - Open the `application.properties` (or `application.yml`) file and configure the database connection properties, such as URL, username, and password.
@@ -41,16 +43,21 @@ We will create two main tables: `users` and `films` to handle user information a
 1. **`users` Table:**
     - `id` (Primary Key)
     - `username`
-    - `password` (hashed or encrypted)
-    - Other user-related information as required (e.g., name, email)
+    - `email`
+    - `phoneNumber`
+    - `password` (hashed :: encrypted)
 
 2. **`films` Table:**
     - `id` (Primary Key)
     - `title`
     - `genre`
     - `release_date`
-    - Other film-related information as required.
-    - `user_id` (Foreign Key referencing `users.id`) to establish a connection between films and users.
+
+3. **`watched_films` Table:**
+    - `id` (Primary Key)
+    - `username`
+    - `film_id`
+    - `film_name`
 
 ## User Registration and Login
 
@@ -67,15 +74,18 @@ We will create two main tables: `users` and `films` to handle user information a
 1. **Fetch Films from External API:**
     - Create a scheduled task that fetches the latest films from the external API once a week.
     - Parse the response and store the film information in the `films` table.
+    - `/api/films/fetch` or `/api/films/fetch/{number}`
 
 2. **Add Films to Watched List:**
     - Create a page where authenticated users can add films they have watched to their list.
     - Users can search and select films from the films stored in the database (including those fetched from the external API).
     - Upon selection, store the film information in the `films` table, associating it with the respective user.
+    - `/api/film/{id}/watched` - endpoint for adding the film to the watched list. Requires a valid JWT token.
 
 3. **List Watched Films:**
     - Create a page where authenticated users can view the films they have watched.
     - Fetch and display the films associated with the logged-in user from the `films` table.
+    - `/api/user/get_watched` - endpoint for listing all watched films. Requires a valid JWT token.
 
 ## Security
 
@@ -85,16 +95,6 @@ We will create two main tables: `users` and `films` to handle user information a
 2. **Authentication and Authorization:**
     - Implement Spring Security to handle user authentication and authorization.
     - Restrict access to certain pages and functionalities based on user roles.
-
-## Testing
-
-1. **Unit Testing:**
-    - Write unit tests for critical components such as user registration, login, and film management.
-    - Utilize testing frameworks like JUnit and Mockito.
-
-2. **Integration Testing:**
-    - Perform integration testing to ensure that the application correctly interacts with the MySQL database using Hibernate.
-    - Mock the external API responses for testing film fetching and storage functionality.
 
 ## Conclusion
 

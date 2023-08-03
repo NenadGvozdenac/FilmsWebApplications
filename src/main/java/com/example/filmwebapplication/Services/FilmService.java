@@ -98,4 +98,8 @@ public class FilmService {
 
         return parseGenresJsonResponse(jsonResponse.getBody()).getResults();
     }
+
+    public ArrayList<Film> getMostPopularFilmsByGenre(String genre) {
+        return filmRepository.findAllByGenre(genre);
+    }
 }
