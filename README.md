@@ -38,7 +38,7 @@ Before starting the development process, ensure you have the following installed
 
 ## Data Model
 
-We will create two main tables: `users` and `films` to handle user information and the films they have watched, respectively.
+We will create three main tables: `users`, `films` and `watched_films` to handle user information and the films they have watched, respectively.
 
 1. **`users` Table:**
     - `id` (Primary Key)
